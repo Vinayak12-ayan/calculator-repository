@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculater</title>
+    <!-- <link rel="stylesheet" href="calcu.css"> -->
+</head>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.containier{
+        height: 550px;
+        width: 100%;
+        /* background-color: rgba(34, 35, 36, 0.492); */
+        /* background-color: rgb(34, 112, 180); */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.calculater{
+    height: 300px;
+    width: 250px;
+    background-color: #322f33;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.number ul li{
+    list-style: none;
+    
+}
+.inputtext{
+    height: 50px;
+    width: 210px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #f6f0f0af;
+}
+.inputtext input{
+    height:40px;
+    width: 230px;
+    margin-bottom:8px ;
+    background-color:transparent;
+    border: none;
+}
+.number{
+    padding-left: 10px;
+}
+.number button{
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    background-color:#f6f0f0af;
+    font-size: 15px;
+    cursor: pointer;
+}
+.equ{
+    background-color: orange;
+}
+.b button{
+    margin-top: 200px;
+}
+@media screen and (max-width:700px)  {
+    .calculater{
+        height: 370px;
+        width: 270px;
+    }
+    .number button{
+        height: 45px;
+        width: 45px;
+        margin-bottom: 10px;
+        color: white;
+
+    }
+    .inputtext input{
+        /* height: 45px; */
+        color: white;
+        font-size: 15px;
+      
+    }
+    .inputtext{
+        margin-left: 8px;
+    }
+    
+}
+@media screen and (min-width:700px){
+    .containier{
+        background-color: antiquewhite;
+    }
+    .calculater{
+        height: 350px;
+        width: 400px;
+        background-color: black;
+    }
+    .number{
+        display: flex;
+    }
+    .number button{
+        height: 55px;
+        width: 55px;
+        box-shadow: 2px 8px 8px black;
+        color: white;
+    }
+    .inputtext input{
+        height: 60px;
+        width: 360px;
+        color: aliceblue;
+        font-size: 20px;
+    }
+    .inputtext{
+        height: 60px;
+        width: 360px;
+        margin-bottom: 10px;
+    }
+    
+}
+</style>
+
+<body>
+    <button  onclick="black()" style="margin-top: 100px; background-color: antiquewhite;">Dark></button>
+    <button onclick="lightBlue()">lightBlue></button>
+    <button onclick="lightred()">lightred></button>
+    <button onclick="lightgreen()">lightgreen></button>
+    <button onclick="white()">white></button>
+    <div class="containier" >
+        
+        <div class="calculater" id="b">
+            <div class="inputtext">
+                <input type="text" placeholder="0" id="showresult">
+            </div>
+            <div class="number">
+                <div>
+                    <button type="button" onclick="allclear()">Ac</button>
+                    <button type="button"  onclick="clearByOne()">DC</button>
+                    <button type="button" onclick="getDigit(event)">%</button>
+                    <button type="button"onclick="getDigit(event)">/</button>
+                </div>
+                <div>
+                    <button type="button" onclick="getDigit(event)">7</button>
+                    <button type="button" onclick="getDigit(event)">8</button>
+                    <button type="button" onclick="getDigit(event)">9</button>
+                    <button type="button" onclick="getDigit(event)">*</button>
+                </div>
+                <div>
+                    <button type="button" onclick="getDigit(event)">4</button>
+                    <button type="button" onclick="getDigit(event)">5</button>
+                    <button type="button" onclick="getDigit(event)">6</button>
+                    <button type="button" onclick="getDigit(event)">-</button>
+
+                </div>
+                <div>
+                    <button type="button" onclick="getDigit(event)">1</button>
+                    <button type="button"onclick="getDigit(event)">2</button>
+                    <button type="button"onclick="getDigit(event)">3</button>
+                    <button type="button"onclick="getDigit(event)">+</button>
+                </div>
+                <div>
+                    <button type="button"onclick="getDigit(event)">00</button>
+                    <button type="button"onclick="getDigit(event)">0</button>
+                    <button type="button"onclick="getDigit(event)">.</button>
+                    <button  type="button"  onclick="getDigit(event)" style="background-color: orange;">=</button>
+                </div>
+            </div>
+           
+        </div>
+        <!-- <button class="btnn" onclick="mode()">Dark></button> -->
+    </div>
+
+
+    <script>
+        // let showresult = document.querySelector(".showresult")
+
+        let unit = ""
+        function getDigit(e) {
+            let a = document.querySelector("#showresult")
+            // console.log(e.target);
+            
+            if (e.target.innerHTML == "=") {
+                let cal = eval(unit)
+                // console.log(cal);
+                
+                a.value = cal;
+                unit = cal
+            } else {
+                unit += e.target.innerHTML
+                a.value = unit
+            }
+            // console.log(cal);
+
+        }
+
+        function allclear(){
+            unit = ""
+            let a = document.querySelector("#showresult")
+            a.value = ""
+        }
+
+        function clearByOne(){
+            let a = document.querySelector("#showresult")
+            unit = unit.slice(0,-1)
+            a.value = unit 
+            
+        }
+
+    
+    // let body = document.querySelector("body")
+    // let b = document.querySelector("b")
+    // let btn = document.querySelector(".btn")
+    function black(){
+            
+        document.getElementById("b").style.backgroundColor="black"; 
+    }
+       
+    function lightBlue(){
+            document.getElementById("b").style.backgroundColor="blue"; 
+    }
+    function lightred(){
+            document.getElementById("b").style.backgroundColor="red"; 
+    }
+    function lightgreen(){
+            document.getElementById("b").style.backgroundColor="green"; 
+    }
+    function white(){
+            document.getElementById("b").style.backgroundColor="white"; 
+        
+    }
+
+       
+    
+    </script>
+</body>
+
+</html>
